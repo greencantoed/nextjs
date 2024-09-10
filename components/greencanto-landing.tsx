@@ -89,7 +89,7 @@ export function GreencantoLanding() {
             <div className="text-center">
               <h1 className="text-5xl font-bold text-[#2D677D] mb-4">Greencanto</h1>
               <p className="text-xl text-[#2D677D] mb-4">Progetti agrivoltaici serializzati localizzati in Sicilia</p>
-              <p className="text-lg text-[#2D677D] mb-8">Un&apos;impresa sociale per il recupero dei terreni agricoli abbandonati.</p>
+              <p className="text-lg text-[#2D677D] mb-8">Un'impresa sociale per il recupero dei terreni agricoli abbandonati.</p>
               <Button className="bg-[#2D677D] text-white hover:bg-[#CEF1BD] hover:text-[#2D677D]" onClick={() => scrollTo('mission')}>
                 Learn More <ChevronDown className="ml-2" />
               </Button>
@@ -102,7 +102,7 @@ export function GreencantoLanding() {
               <CardContent className="p-6">
                 <h2 className="text-3xl font-bold text-[#2D677D] mb-4">La Nostra Missione</h2>
                 <p className="text-[#2D677D]">
-                  La nostra missione è chiara: rigenerare terreni abbandonati e farli rifiorire grazie a investimenti sostenibili. Offriamo agli utenti l&apos;opportunità di acquistare quote di aziende agricole, promuovendo un&apos;agricoltura innovativa e sostenibile. Parallelamente, sosteniamo progetti di riqualificazione ambientale, con un focus speciale sulla Sicilia.
+                  La nostra missione è chiara: rigenerare terreni abbandonati e farli rifiorire grazie a investimenti sostenibili. Offriamo agli utenti l'opportunità di acquistare quote di aziende agricole, promuovendo un'agricoltura innovativa e sostenibile. Parallelamente, sosteniamo progetti di riqualificazione ambientale, con un focus speciale sulla Sicilia.
                 </p>
               </CardContent>
             </Card>
@@ -114,7 +114,7 @@ export function GreencantoLanding() {
               <CardContent className="p-6">
                 <h2 className="text-3xl font-bold text-[#2D677D] mb-4">Chi Siamo</h2>
                 <p className="text-[#2D677D]">
-                  Greencanto è nata dalla visione di Edoardo Cumitini e Giuseppe Marletta, professionisti con esperienza in agricoltura, finanza e sostenibilità. Siamo un team di esperti, uniti dall&apos;obiettivo di creare un&apos;agricoltura che rispetti l&apos;ambiente, valorizzi le risorse naturali e generi benefici economici per i nostri investitori.
+                  Greencanto è nata dalla visione di Edoardo Cumitini e Giuseppe Marletta, professionisti con esperienza in agricoltura, finanza e sostenibilità. Siamo un team di esperti, uniti dall'obiettivo di creare un'agricoltura che rispetti l'ambiente, valorizzi le risorse naturali e generi benefici economici per i nostri investitori.
                 </p>
               </CardContent>
             </Card>
@@ -126,7 +126,7 @@ export function GreencantoLanding() {
               <CardContent className="p-6 text-center">
                 <h2 className="text-3xl font-bold text-[#2D677D] mb-4">Unisciti a Noi</h2>
                 <p className="text-[#2D677D] mb-6">
-                  Greencanto non è solo un&apos;opportunità di investimento; è una comunità di persone che credono in un futuro più sostenibile. Con il supporto del nostro team esperto, ci impegniamo a trasformare terreni abbandonati in risorse produttive, offrendo un ritorno economico tangibile ai nostri investitori e un impatto positivo sull&apos;ambiente.
+                  Greencanto non è solo un'opportunità di investimento; è una comunità di persone che credono in un futuro più sostenibile. Con il supporto del nostro team esperto, ci impegniamo a trasformare terreni abbandonati in risorse produttive, offrendo un ritorno economico tangibile ai nostri investitori e un impatto positivo sull'ambiente.
                 </p>
                 <Button className="bg-[#2D677D] text-white hover:bg-[#FAF0E6] hover:text-[#2D677D]">
                   Vai alla Pagina Privata
@@ -160,16 +160,16 @@ export function GreencantoLanding() {
                 <div className="space-y-4">
                   {[
                     {
-                      question: "Cos&apos;è l&apos;agrivoltaico?",
-                      answer: "L&apos;agrivoltaico combina l&apos;energia solare con l&apos;agricoltura, permettendo di utilizzare lo stesso terreno per produrre energia elettrica e coltivare. Questo approccio innovativo massimizza l&apos;uso della terra, genera energia pulita e sostiene l&apos;agricoltura sostenibile."
+                      question: "Cos'è l'agrivoltaico?",
+                      answer: "L'agrivoltaico combina l'energia solare con l'agricoltura, permettendo di utilizzare lo stesso terreno per produrre energia elettrica e coltivare. Questo approccio innovativo massimizza l'uso della terra, genera energia pulita e sostiene l'agricoltura sostenibile."
                     },
                     {
-                      question: "Quali sono i benefici dell&apos;acquisto di quote?",
-                      answer: "Acquistando quote, contribuisci allo sviluppo di terreni agricoli abbandonati, supportando l&apos;agricoltura sostenibile e la rigenerazione ambientale. Inoltre, puoi ricevere ritorni finanziari dai profitti generati dall&apos;azienda agricola."
+                      question: "Quali sono i benefici dell'acquisto di quote?",
+                      answer: "Acquistando quote, contribuisci allo sviluppo di terreni agricoli abbandonati, supportando l'agricoltura sostenibile e la rigenerazione ambientale. Inoltre, puoi ricevere ritorni finanziari dai profitti generati dall'azienda agricola."
                     },
                     {
                       question: "Come posso iniziare a investire?",
-                      answer: "Per iniziare a investire, basta scaricare l&apos;app, registrarsi, scegliere il progetto agricolo di interesse e acquistare le quote disponibili. Potrai monitorare i tuoi investimenti direttamente dall&apos;app."
+                      answer: "Per iniziare a investire, basta scaricare l'app, registrarsi, scegliere il progetto agricolo di interesse e acquistare le quote disponibili. Potrai monitorare i tuoi investimenti direttamente dall'app."
                     }
                   ].map((faq, index) => (
                     <div key={index} className="border-b border-[#2D677D] pb-2">
