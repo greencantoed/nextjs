@@ -1,101 +1,199 @@
-import Image from "next/image";
+import { useState, useEffect } from 'react'
+import { Button } from "@/components/ui/button"
+import { Card, CardContent } from "@/components/ui/card"
+import { ChevronDown, ChevronUp } from "lucide-react"
+import Image from 'next/image'
 
-export default function Home() {
+export default function Greencanto() {
+  const [activeSection, setActiveSection] = useState('home')
+  const [openFaq, setOpenFaq] = useState<number | null>(null)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const sections = ['home', 'mission', 'who', 'join', 'contact', 'faq']
+      const currentSection = sections.find(section => {
+        const element = document.getElementById(section)
+        if (element) {
+          const rect = element.getBoundingClientRect()
+          return rect.top <= 100 && rect.bottom >= 100
+        }
+        return false
+      })
+      if (currentSection) {
+        setActiveSection(currentSection)
+      }
+    }
+
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
+  const scrollTo = (id: string) => {
+    const element = document.getElementById(id)
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' })
+    }
+  }
+
+  const toggleFaq = (index: number) => {
+    setOpenFaq(openFaq === index ? null : index)
+  }
+
+  const navItems = [
+    { label: 'Home', id: 'home' },
+    { label: 'La Nostra Missione', id: 'mission' },
+    { label: 'Chi Siamo', id: 'who' },
+    { label: 'Unisciti a Noi', id: 'join' },
+    { label: 'Contattaci', id: 'contact' },
+    { label: 'FAQ', id: 'faq' },
+  ]
+
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
+    <div className="flex min-h-screen bg-[#FAF0E6]">
+      {/* Left side - Large image placeholder */}
+      <div className="hidden lg:block w-[960px] h-[6480px] bg-[#2D677D] fixed left-0 top-0">
         <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
+          src="/placeholder.svg?height=6480&width=960"
+          alt="Large placeholder image"
+          width={960}
+          height={6480}
+          className="w-full h-full object-cover"
         />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+      </div>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+      {/* Right side - Content */}
+      <div className="flex-1 lg:ml-[960px]">
+        {/* Navigation */}
+        <nav className="bg-[#2D677D] text-white p-4 sticky top-0 z-10">
+          <ul className="flex justify-end space-x-4">
+            {navItems.map((item, index) => (
+              <li key={index}>
+                <Button
+                  variant="ghost"
+                  className={`text-white hover:text-[#CEF1BD] ${activeSection === item.id ? 'bg-[#CEF1BD] text-[#2D677D]' : ''}`}
+                  onClick={() => scrollTo(item.id)}
+                >
+                  {item.label}
+                </Button>
+              </li>
+            ))}
+          </ul>
+        </nav>
+
+        {/* Content sections */}
+        <main className="space-y-32 py-16">
+          {/* Home section */}
+          <section id="home" className="min-h-screen flex items-center justify-center p-8">
+            <div className="text-center">
+              <h1 className="text-5xl font-bold text-[#2D677D] mb-4">Greencanto</h1>
+              <p className="text-xl text-[#2D677D] mb-4">Progetti agrivoltaici serializzati localizzati in Sicilia</p>
+              <p className="text-lg text-[#2D677D] mb-8">Un'impresa sociale per il recupero dei terreni agricoli abbandonati.</p>
+              <Button className="bg-[#2D677D] text-white hover:bg-[#CEF1BD] hover:text-[#2D677D]" onClick={() => scrollTo('mission')}>
+                Learn More <ChevronDown className="ml-2" />
+              </Button>
+            </div>
+          </section>
+
+          {/* Our Mission section */}
+          <section id="mission" className="min-h-screen flex items-center justify-center p-8 bg-[#CEF1BD]">
+            <Card className="max-w-2xl">
+              <CardContent className="p-6">
+                <h2 className="text-3xl font-bold text-[#2D677D] mb-4">La Nostra Missione</h2>
+                <p className="text-[#2D677D]">
+                  La nostra missione è chiara: rigenerare terreni abbandonati e farli rifiorire grazie a investimenti sostenibili. Offriamo agli utenti l'opportunità di acquistare quote di aziende agricole, promuovendo un'agricoltura innovativa e sostenibile. Parallelamente, sosteniamo progetti di riqualificazione ambientale, con un focus speciale sulla Sicilia.
+                </p>
+              </CardContent>
+            </Card>
+          </section>
+
+          {/* Who are we section */}
+          <section id="who" className="min-h-screen flex items-center justify-center p-8">
+            <Card className="max-w-2xl">
+              <CardContent className="p-6">
+                <h2 className="text-3xl font-bold text-[#2D677D] mb-4">Chi Siamo</h2>
+                <p className="text-[#2D677D]">
+                  Greencanto è nata dalla visione di Edoardo Cumitini e Giuseppe Marletta, professionisti con esperienza in agricoltura, finanza e sostenibilità. Siamo un team di esperti, uniti dall'obiettivo di creare un'agricoltura che rispetti l'ambiente, valorizzi le risorse naturali e generi benefici economici per i nostri investitori.
+                </p>
+              </CardContent>
+            </Card>
+          </section>
+
+          {/* Join us now! section */}
+          <section id="join" className="min-h-screen flex items-center justify-center p-8 bg-[#CEF1BD]">
+            <Card className="max-w-2xl">
+              <CardContent className="p-6 text-center">
+                <h2 className="text-3xl font-bold text-[#2D677D] mb-4">Unisciti a Noi</h2>
+                <p className="text-[#2D677D] mb-6">
+                  Greencanto non è solo un'opportunità di investimento; è una comunità di persone che credono in un futuro più sostenibile. Con il supporto del nostro team esperto, ci impegniamo a trasformare terreni abbandonati in risorse produttive, offrendo un ritorno economico tangibile ai nostri investitori e un impatto positivo sull'ambiente.
+                </p>
+                <Button className="bg-[#2D677D] text-white hover:bg-[#FAF0E6] hover:text-[#2D677D]">
+                  Vai alla Pagina Privata
+                </Button>
+              </CardContent>
+            </Card>
+          </section>
+
+          {/* Contacts section */}
+          <section id="contact" className="min-h-screen flex items-center justify-center p-8">
+            <Card className="max-w-2xl">
+              <CardContent className="p-6">
+                <h2 className="text-3xl font-bold text-[#2D677D] mb-4">Contattaci</h2>
+                <form className="space-y-4">
+                  <input type="text" placeholder="Nome" required className="w-full p-2 border rounded" />
+                  <input type="email" placeholder="Email" required className="w-full p-2 border rounded" />
+                  <textarea placeholder="Messaggio" required className="w-full p-2 border rounded h-32"></textarea>
+                  <Button type="submit" className="bg-[#2D677D] text-white hover:bg-[#CEF1BD] hover:text-[#2D677D]">
+                    Invia
+                  </Button>
+                </form>
+              </CardContent>
+            </Card>
+          </section>
+
+          {/* FAQ section */}
+          <section id="faq" className="min-h-screen flex items-center justify-center p-8 bg-[#CEF1BD]">
+            <Card className="max-w-2xl">
+              <CardContent className="p-6">
+                <h2 className="text-3xl font-bold text-[#2D677D] mb-4">Domande Frequenti</h2>
+                <div className="space-y-4">
+                  {[
+                    {
+                      question: "Cos'è l'agrivoltaico?",
+                      answer: "L'agrivoltaico combina l'energia solare con l'agricoltura, permettendo di utilizzare lo stesso terreno per produrre energia elettrica e coltivare. Questo approccio innovativo massimizza l'uso della terra, genera energia pulita e sostiene l'agricoltura sostenibile."
+                    },
+                    {
+                      question: "Quali sono i benefici dell'acquisto di quote?",
+                      answer: "Acquistando quote, contribuisci allo sviluppo di terreni agricoli abbandonati, supportando l'agricoltura sostenibile e la rigenerazione ambientale. Inoltre, puoi ricevere ritorni finanziari dai profitti generati dall'azienda agricola."
+                    },
+                    {
+                      question: "Come posso iniziare a investire?",
+                      answer: "Per iniziare a investire, basta scaricare l'app, registrarsi, scegliere il progetto agricolo di interesse e acquistare le quote disponibili. Potrai monitorare i tuoi investimenti direttamente dall'app."
+                    }
+                  ].map((faq, index) => (
+                    <div key={index} className="border-b border-[#2D677D] pb-2">
+                      <button
+                        className="flex justify-between items-center w-full text-left font-bold text-[#2D677D]"
+                        onClick={() => toggleFaq(index)}
+                      >
+                        {faq.question}
+                        {openFaq === index ? <ChevronUp /> : <ChevronDown />}
+                      </button>
+                      {openFaq === index && (
+                        <p className="mt-2 text-[#2D677D]">{faq.answer}</p>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+          </section>
+        </main>
+
+        {/* Footer */}
+        <footer className="bg-[#2D677D] text-white p-4 text-center">
+          <p>&copy; {new Date().getFullYear()} Greencanto. All rights reserved.</p>
+        </footer>
+      </div>
     </div>
-  );
+  )
 }
