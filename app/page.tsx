@@ -1,5 +1,6 @@
-import { GreencantoLanding } from "@/components/greencanto-landing"
+import { GreencantoLandingFull } from "@/components/greencanto-landing"
+
 
 export default function Home() {
-  return <GreencantoLanding />
+  return <GreencantoLandingFull />
 }
