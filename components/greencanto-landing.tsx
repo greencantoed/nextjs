@@ -2,13 +2,13 @@
 
 import { useState, useEffect } from 'react'
 import { Button } from "@/components/ui/button"
-import { Card, CardContent } from "@/components/ui/card"
-import { ChevronDown, ChevronUp } from "lucide-react"
+import { ChevronDown, ChevronUp, Menu, Zap, Leaf, Users } from "lucide-react"
 import Image from 'next/image'
 
-export function GreencantoLanding() {
+export function GreencantoLandingFull() {
   const [activeSection, setActiveSection] = useState('home')
   const [openFaq, setOpenFaq] = useState<number | null>(null)
+  const [menuOpen, setMenuOpen] = useState(false)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -35,6 +35,7 @@ export function GreencantoLanding() {
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' })
     }
+    setMenuOpen(false)
   }
 
   const toggleFaq = (index: number) => {
@@ -51,28 +52,34 @@ export function GreencantoLanding() {
   ]
 
   return (
-    <div className="flex min-h-screen bg-[#FAF0E6]">
-      {/* Left side - Large image placeholder */}
-      <div className="hidden lg:block w-[960px] h-[6480px] bg-[#2D677D] fixed left-0 top-0">
-        <Image
-          src="/placeholder.svg?height=6480&width=960"
-          alt="Large placeholder image"
-          width={960}
-          height={6480}
-          className="w-full h-full object-cover"
-        />
-      </div>
+    <div className="min-h-screen bg-[#f4f4f4] font-sans">
+      <style jsx global>{`
+        @import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=Quattrocento:wght@400;700&display=swap');
+        
+        body {
+          font-family: 'Quattrocento', serif;
+        }
+        
+        h1, h2, h3 {
+          font-family: 'Archivo Black', sans-serif;
+        }
+      `}</style>
 
-      {/* Right side - Content */}
-      <div className="flex-1 lg:ml-[960px]">
-        {/* Navigation */}
-        <nav className="bg-[#2D677D] text-white p-4 sticky top-0 z-10">
-          <ul className="flex justify-end space-x-4">
+      {/* Navigation */}
+      <nav className="bg-[#2d677d] text-white p-4 sticky top-0 z-10">
+        <div className="container mx-auto flex justify-between items-center">
+          <h1 className="text-2xl font-bold">Greencanto</h1>
+          <div className="md:hidden">
+            <Button variant="ghost" onClick={() => setMenuOpen(!menuOpen)}>
+              <Menu className="h-6 w-6" />
+            </Button>
+          </div>
+          <ul className={`md:flex space-y-2 md:space-y-0 md:space-x-4 ${menuOpen ? 'block' : 'hidden'}`}>
             {navItems.map((item, index) => (
               <li key={index}>
                 <Button
                   variant="ghost"
-                  className={`text-white hover:text-[#CEF1BD] ${activeSection === item.id ? 'bg-[#CEF1BD] text-[#2D677D]' : ''}`}
+                  className={`text-white hover:text-[#d76a03] ${activeSection === item.id ? 'bg-[#d76a03] text-white' : ''}`}
                   onClick={() => scrollTo(item.id)}
                 >
                   {item.label}
@@ -80,122 +87,154 @@ export function GreencantoLanding() {
               </li>
             ))}
           </ul>
-        </nav>
+        </div>
+      </nav>
 
-        {/* Content sections */}
-        <main className="space-y-32 py-16">
-          {/* Home section */}
-          <section id="home" className="min-h-screen flex items-center justify-center p-8">
-            <div className="text-center">
-              <h1 className="text-5xl font-bold text-[#2D677D] mb-4">Greencanto</h1>
-              <p className="text-xl text-[#2D677D] mb-4">Progetti agrivoltaici serializzati localizzati in Sicilia</p>
-              <p className="text-lg text-[#2D677D] mb-8">Un'impresa sociale per il recupero dei terreni agricoli abbandonati.</p>
-              <Button className="bg-[#2D677D] text-white hover:bg-[#CEF1BD] hover:text-[#2D677D]" onClick={() => scrollTo('mission')}>
-                Learn More <ChevronDown className="ml-2" />
-              </Button>
+      {/* Content sections */}
+      <main className="space-y-24">
+        {/* Home section */}
+        <section id="home" className="min-h-screen flex items-center justify-center p-8 bg-cover bg-center relative" style={{backgroundImage: 'url("/placeholder.svg?height=1080&width=1920")'}}>
+          <div className="absolute inset-0 bg-gradient-to-r from-[#2d677d] to-transparent opacity-80"></div>
+          <div className="relative z-10 text-white max-w-4xl mx-auto">
+            <h1 className="text-6xl font-bold mb-6 leading-tight">Rigeneriamo l'agricoltura Siciliana</h1>
+            <p className="text-xl mb-8 leading-relaxed">
+              Greencanto ha come obiettivo il recupero e la messa a produttività di terreni incolti ed abbandonati Siciliani, con il fine ultimo di realizzare progetti agri-voltaici serializzati e sostenibili. Unisciti a noi per immaginare una Sicilia più verde.
+            </p>
+            <Button className="bg-[#d76a03] text-white hover:bg-[#f27d0c] text-lg px-8 py-3" onClick={() => scrollTo('mission')}>
+              Scopri di Più <ChevronDown className="ml-2" />
+            </Button>
+          </div>
+        </section>
+
+        {/* Our Mission section */}
+        <section id="mission" className="py-24 bg-white">
+          <div className="container mx-auto px-8">
+            <div className="flex items-center mb-8">
+              <Zap className="w-12 h-12 text-[#d76a03] mr-4" />
+              <h2 className="text-4xl font-bold text-[#2d677d]">La Nostra Missione</h2>
             </div>
-          </section>
+            <p className="text-[#2d677d] text-xl leading-relaxed max-w-4xl">
+              La nostra missione è chiara: rigenerare terreni abbandonati e farli rifiorire grazie a investimenti sostenibili. Offriamo agli utenti l'opportunità di acquistare quote di aziende agricole, promuovendo un'agricoltura innovativa e sostenibile. Parallelamente, sosteniamo progetti di riqualificazione ambientale, con un focus speciale sulla Sicilia.
+            </p>
+          </div>
+        </section>
 
-          {/* Our Mission section */}
-          <section id="mission" className="min-h-screen flex items-center justify-center p-8 bg-[#CEF1BD]">
-            <Card className="max-w-2xl">
-              <CardContent className="p-6">
-                <h2 className="text-3xl font-bold text-[#2D677D] mb-4">La Nostra Missione</h2>
-                <p className="text-[#2D677D]">
-                  La nostra missione è chiara: rigenerare terreni abbandonati e farli rifiorire grazie a investimenti sostenibili. Offriamo agli utenti l'opportunità di acquistare quote di aziende agricole, promuovendo un'agricoltura innovativa e sostenibile. Parallelamente, sosteniamo progetti di riqualificazione ambientale, con un focus speciale sulla Sicilia.
-                </p>
-              </CardContent>
-            </Card>
-          </section>
-
-          {/* Who are we section */}
-          <section id="who" className="min-h-screen flex items-center justify-center p-8">
-            <Card className="max-w-2xl">
-              <CardContent className="p-6">
-                <h2 className="text-3xl font-bold text-[#2D677D] mb-4">Chi Siamo</h2>
-                <p className="text-[#2D677D]">
-                  Greencanto è nata dalla visione di Edoardo Cumitini e Giuseppe Marletta, professionisti con esperienza in agricoltura, finanza e sostenibilità. Siamo un team di esperti, uniti dall'obiettivo di creare un'agricoltura che rispetti l'ambiente, valorizzi le risorse naturali e generi benefici economici per i nostri investitori.
-                </p>
-              </CardContent>
-            </Card>
-          </section>
-
-          {/* Join us now! section */}
-          <section id="join" className="min-h-screen flex items-center justify-center p-8 bg-[#CEF1BD]">
-            <Card className="max-w-2xl">
-              <CardContent className="p-6 text-center">
-                <h2 className="text-3xl font-bold text-[#2D677D] mb-4">Unisciti a Noi</h2>
-                <p className="text-[#2D677D] mb-6">
-                  Greencanto non è solo un'opportunità di investimento; è una comunità di persone che credono in un futuro più sostenibile. Con il supporto del nostro team esperto, ci impegniamo a trasformare terreni abbandonati in risorse produttive, offrendo un ritorno economico tangibile ai nostri investitori e un impatto positivo sull'ambiente.
-                </p>
-                <Button className="bg-[#2D677D] text-white hover:bg-[#FAF0E6] hover:text-[#2D677D]">
-                  Vai alla Pagina Privata
-                </Button>
-              </CardContent>
-            </Card>
-          </section>
-
-          {/* Contacts section */}
-          <section id="contact" className="min-h-screen flex items-center justify-center p-8">
-            <Card className="max-w-2xl">
-              <CardContent className="p-6">
-                <h2 className="text-3xl font-bold text-[#2D677D] mb-4">Contattaci</h2>
-                <form className="space-y-4">
-                  <input type="text" placeholder="Nome" required className="w-full p-2 border rounded" />
-                  <input type="email" placeholder="Email" required className="w-full p-2 border rounded" />
-                  <textarea placeholder="Messaggio" required className="w-full p-2 border rounded h-32"></textarea>
-                  <Button type="submit" className="bg-[#2D677D] text-white hover:bg-[#CEF1BD] hover:text-[#2D677D]">
-                    Invia
-                  </Button>
-                </form>
-              </CardContent>
-            </Card>
-          </section>
-
-          {/* FAQ section */}
-          <section id="faq" className="min-h-screen flex items-center justify-center p-8 bg-[#CEF1BD]">
-            <Card className="max-w-2xl">
-              <CardContent className="p-6">
-                <h2 className="text-3xl font-bold text-[#2D677D] mb-4">Domande Frequenti</h2>
-                <div className="space-y-4">
-                  {[
-                    {
-                      question: "Cos'è l'agrivoltaico?",
-                      answer: "L'agrivoltaico combina l'energia solare con l'agricoltura, permettendo di utilizzare lo stesso terreno per produrre energia elettrica e coltivare. Questo approccio innovativo massimizza l'uso della terra, genera energia pulita e sostiene l'agricoltura sostenibile."
-                    },
-                    {
-                      question: "Quali sono i benefici dell'acquisto di quote?",
-                      answer: "Acquistando quote, contribuisci allo sviluppo di terreni agricoli abbandonati, supportando l'agricoltura sostenibile e la rigenerazione ambientale. Inoltre, puoi ricevere ritorni finanziari dai profitti generati dall'azienda agricola."
-                    },
-                    {
-                      question: "Come posso iniziare a investire?",
-                      answer: "Per iniziare a investire, basta scaricare l'app, registrarsi, scegliere il progetto agricolo di interesse e acquistare le quote disponibili. Potrai monitorare i tuoi investimenti direttamente dall'app."
-                    }
-                  ].map((faq, index) => (
-                    <div key={index} className="border-b border-[#2D677D] pb-2">
-                      <button
-                        className="flex justify-between items-center w-full text-left font-bold text-[#2D677D]"
-                        onClick={() => toggleFaq(index)}
-                      >
-                        {faq.question}
-                        {openFaq === index ? <ChevronUp /> : <ChevronDown />}
-                      </button>
-                      {openFaq === index && (
-                        <p className="mt-2 text-[#2D677D]">{faq.answer}</p>
-                      )}
-                    </div>
-                  ))}
+        {/* Who are we section */}
+        <section id="who" className="py-24 bg-[#f8f8f8]">
+          <div className="container mx-auto px-8">
+            <div className="flex items-center mb-8">
+              <Users className="w-12 h-12 text-[#d76a03] mr-4" />
+              <h2 className="text-4xl font-bold text-[#2d677d]">Chi Siamo</h2>
+            </div>
+            <div className="grid md:grid-cols-2 gap-16 max-w-4xl mx-auto">
+              <div>
+                <div className="w-48 h-48 mx-auto mb-6 bg-gray-300 rounded-full overflow-hidden">
+                  <Image
+                    src="/placeholder.svg?height=192&width=192"
+                    alt="Edoardo Lorenzo Cumitini"
+                    width={192}
+                    height={192}
+                    className="w-full h-full object-cover"
+                  />
                 </div>
-              </CardContent>
-            </Card>
-          </section>
-        </main>
+                <h3 className="text-2xl font-bold text-[#2d677d] mb-4">Edoardo Lorenzo Cumitini</h3>
+                <p className="text-[#2d677d] text-lg">
+                  PhD candidate in Social Sciences at University of Hamburg, con expertise in Geografia Economica. La sua visione e conoscenza guidano l'approccio innovativo di Greencanto nel connettere agricoltura sostenibile e energia rinnovabile.
+                </p>
+              </div>
+              <div>
+                <div className="w-48 h-48 mx-auto mb-6 bg-gray-300 rounded-full overflow-hidden">
+                  <Image
+                    src="/placeholder.svg?height=192&width=192"
+                    alt="Giuseppe Marletta"
+                    width={192}
+                    height={192}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <h3 className="text-2xl font-bold text-[#2d677d] mb-4">Giuseppe Marletta</h3>
+                <p className="text-[#2d677d] text-lg">
+                  Avvocato e agro-imprenditore. La sua esperienza legale e imprenditoriale nel settore agricolo è fondamentale per guidare Greencanto attraverso le complessità normative e operative dei progetti agrivoltaici.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
 
-        {/* Footer */}
-        <footer className="bg-[#2D677D] text-white p-4 text-center">
+        {/* Join us now! section */}
+        <section id="join" className="py-24 bg-[#2d677d] text-white">
+          <div className="container mx-auto px-8 text-center">
+            <div className="flex items-center justify-center mb-8">
+              <Leaf className="w-12 h-12 text-[#d76a03] mr-4" />
+              <h2 className="text-4xl font-bold">Unisciti a Noi</h2>
+            </div>
+            <p className="text-xl mb-10 leading-relaxed max-w-4xl mx-auto">
+              Greencanto non è solo un'opportunità di investimento; è una comunità di persone che credono in un futuro più sostenibile. Con il supporto del nostro team esperto, ci impegniamo a trasformare terreni abbandonati in risorse produttive, offrendo un ritorno economico tangibile ai nostri investitori e un impatto positivo sull'ambiente.
+            </p>
+            <Button className="bg-[#d76a03] text-white hover:bg-[#f27d0c] text-lg px-8 py-3">
+              Vai alla Pagina Privata
+            </Button>
+          </div>
+        </section>
+
+        {/* Contacts section */}
+        <section id="contact" className="py-24 bg-white">
+          <div className="container mx-auto px-8">
+            <h2 className="text-4xl font-bold text-[#2d677d] mb-8">Contattaci</h2>
+            <form className="space-y-6 max-w-4xl mx-auto">
+              <input type="text" placeholder="Nome" required className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2d677d]" />
+              <input type="email" placeholder="Email" required className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2d677d]" />
+              <textarea placeholder="Messaggio" required className="w-full p-3 border border-gray-300 rounded-lg h-32 focus:outline-none focus:ring-2 focus:ring-[#2d677d]"></textarea>
+              <Button type="submit" className="bg-[#d76a03] text-white hover:bg-[#f27d0c] text-lg px-8 py-3">
+                Invia
+              </Button>
+            </form>
+          </div>
+        </section>
+
+        {/* FAQ section */}
+        <section id="faq" className="py-24 bg-[#f8f8f8]">
+          <div className="container mx-auto px-8">
+            <h2 className="text-4xl font-bold text-[#2d677d] mb-8">Domande Frequenti</h2>
+            <div className="space-y-6 max-w-4xl mx-auto">
+              {[
+                {
+                  question: "Cos'è l'agrivoltaico?",
+                  answer: "L'agrivoltaico combina l'energia solare con l'agricoltura, permettendo di utilizzare lo stesso terreno per produrre energia elettrica e coltivare. Questo approccio innovativo massimizza l'uso della terra, genera energia pulita e sostiene l'agricoltura sostenibile."
+                },
+                {
+                  question: "Quali sono i benefici dell'acquisto di quote?",
+                  answer: "Acquistando quote, contribuisci allo sviluppo di terreni agricoli abbandonati, supportando l'agricoltura sostenibile e la rigenerazione ambientale. Inoltre, puoi ricevere ritorni finanziari dai profitti generati dall'azienda agricola."
+                },
+                {
+                  question: "Come posso iniziare a investire?",
+                  answer: "Per iniziare a investire, basta scaricare l'app, registrarsi, scegliere il progetto agricolo di interesse e acquistare le quote disponibili. Potrai monitorare i tuoi investimenti direttamente dall'app."
+                }
+              ].map((faq, index) => (
+                <div key={index} className="border-b border-gray-300 pb-4">
+                  <button
+                    className="flex justify-between items-center w-full text-left font-bold text-[#2d677d] text-xl"
+                    onClick={() => toggleFaq(index)}
+                  >
+                    {faq.question}
+                    {openFaq === index ? <ChevronUp className="text-[#d76a03] w-6 h-6" /> : <ChevronDown className="text-[#d76a03] w-6 h-6" />}
+                  </button>
+                  {openFaq === index && (
+                    <p className="mt-4 text-[#2d677d] text-lg">{faq.answer}</p>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      </main>
+
+      {/* Footer */}
+      <footer className="bg-[#2d677d] text-white py-8">
+        <div className="container mx-auto px-8 text-center">
           <p>&copy; {new Date().getFullYear()} Greencanto. All rights reserved.</p>
-        </footer>
-      </div>
+        </div>
+      </footer>
     </div>
   )
 }
