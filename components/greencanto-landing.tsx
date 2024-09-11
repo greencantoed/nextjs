@@ -114,7 +114,7 @@ export function GreencantoLanding() {
               <CardContent className="p-6">
                 <h2 className="text-3xl font-bold text-[#2D677D] mb-4">Chi Siamo</h2>
                 <p className="text-[#2D677D]">
-                  Greencanto è nata dalla visione di Edoardo Cumitini e Giuseppe Marletta, professionisti con esperienza in agricoltura, finanza e sostenibilità. Siamo un team di esperti, uniti dall'obiettivo di creare un’agricoltura che rispetti l’ambiente, valorizzi le risorse naturali e generi benefici economici per i nostri investitori.
+                  Greencanto è nata dalla visione di Edoardo Cumitini e Giuseppe Marletta, professionisti con esperienza in agricoltura, finanza e sostenibilità. Siamo un team di esperti, uniti dall'obiettivo di creare un'agricoltura che rispetti l'ambiente, valorizzi le risorse naturali e generi benefici economici per i nostri investitori.
                 </p>
               </CardContent>
             </Card>
